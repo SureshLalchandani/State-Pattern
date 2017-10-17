@@ -1,5 +1,8 @@
 package airportSecurityState.driver;
 
+import airportSecurityState.util.FileProcessor;
+import airportSecurityState.util.MyLogger;
+import airportSecurityState.util.FileProcessor.Permission;
 
 /**
  * This is a driver/entry of the program i.e main class.
@@ -15,7 +18,7 @@ public class Driver {
 	public static void main(String[] args) {
 
 		if(args == null || args.length != 3) {
-			System.err.println("Please provide valid number of arguments. 5 Arguments are expected: \n1.Input File \n2.Delete File \n3.Output1 File \n4.Output2 File \n5.Output3 File");
+			System.err.println("Please provide valid number of arguments. 3 Arguments are expected: \n1.Input File \n2.Output File \n3.Log Level");
 			System.exit(0);
 			return;
 		}
@@ -23,11 +26,35 @@ public class Driver {
 		if((args[0].trim().length() == 0 || args[0].contains("${arg0}")) || 
 				(args[1].trim().length() == 0 || args[1].contains("${arg1}")) || 
 				(args[2].trim().length() == 0 || args[2].contains("${arg2}"))) {
-			
-			System.err.println("Please provide valid number of arguments. 5 Arguments are expected: \n1.Input File \n2.Delete File \n3.Output1 File \n4.Output2 File \n5.Output3 File");
+
+			System.err.println("Please provide valid number of arguments. 3 Arguments are expected: \n1.Input File \n2.Output File \n3.Log Level");
 			System.exit(0);
 			return;
 		}
+
+
+		String inputFile = args[0];
+		String outputFile = args[1];
+		String debugLevel = args[2];
+		int logLevel = -1;
+
+		try {
+			logLevel = Integer.parseInt(debugLevel);
+		} catch (NumberFormatException e) {
+			System.err.println("Invalid Log level found in the command");
+			System.exit(1);
+		}
+		
+		MyLogger.setDebugValue(logLevel);
+		
+		FileProcessor inputFileProcess = new FileProcessor(inputFile, Permission.READ);
+		inputFileProcess.allowEmptyFile(false);
+		
+		FileProcessor outputFileProcess = new FileProcessor(outputFile, Permission.WRITE);
+		outputFileProcess.allowEmptyFile(true);
+		
+		
+
 
 	}
 

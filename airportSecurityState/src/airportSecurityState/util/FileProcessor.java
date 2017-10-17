@@ -46,7 +46,7 @@ public class FileProcessor {
 	 * Setter method for flag to allow Empty File
 	 * @param permitEmptyFile
 	 */
-	public void setPermitEmptyFile(boolean permitEmptyFile) {
+	public void allowEmptyFile(boolean permitEmptyFile) {
 		this.permitEmptyFile = permitEmptyFile;
 	}
 
