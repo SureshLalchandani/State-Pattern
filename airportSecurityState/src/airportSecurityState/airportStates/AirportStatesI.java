@@ -2,7 +2,7 @@ package airportSecurityState.airportStates;
 
 public interface AirportStatesI {
 	
-	public void tightenOrLoosenSecurity();
+	public AirportStatesI tightenOrLoosenSecurity(int averageTrafficPerDay, int averageProhibitedItemsPerday);
 	public void operations();
 
 }

@@ -3,7 +3,7 @@ package airportSecurityState.airportStates;
 public class LowRisk implements AirportStatesI {
 
 	@Override
-	public void tightenOrLoosenSecurity() {
+	public AirportStatesI tightenOrLoosenSecurity(int averageTrafficPerDay, int averageProhibitedItemsPerday) {
 		// TODO Auto-generated method stub
 		
 	}
