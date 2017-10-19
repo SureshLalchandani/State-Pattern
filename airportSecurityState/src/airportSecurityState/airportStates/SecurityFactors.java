@@ -39,7 +39,10 @@ public class SecurityFactors {
 		
 		while((line = fileProcessor.readLine()) != null) {
 			
-			if(line.trim().length() == 0) continue;
+			if(line.trim().length() == 0) {
+				MyLogger.writeMessage("Line read from file has just whitespaces", DebugLevel.ERROR);
+				continue;
+			}
 			
 			String[] components = line.split(";");
 			try {
@@ -50,6 +53,7 @@ public class SecurityFactors {
 				numPassenger += 1;
 
 				if(Arrays.asList(prohibitedItems).contains(item[1])) {
+					MyLogger.writeMessage("Found a Prohibited Item - " + item[1], DebugLevel.DEBUG);
 					numprohibitedItems += 1;
 				}
 

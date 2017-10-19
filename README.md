@@ -30,6 +30,13 @@ offense.
 [Date: 10/19/2017] 
 
 -----------------------------------------------------------------------
+MyLogger Updates:
+
+Log Leve 0 - RELEASE
+Log Level 1 - DEBUG
+Log Level 2 - ERRORS
+Log Level 3 - STATE
+Log Level 4 - CONSTRUCTOR
 
 Provide justification for Data Structures used in this assignment in
 term of Big O complexity (time and/or space)
