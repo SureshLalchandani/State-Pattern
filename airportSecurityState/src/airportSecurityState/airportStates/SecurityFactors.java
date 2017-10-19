@@ -4,23 +4,39 @@ import java.util.Arrays;
 
 import airportSecurityState.util.FileProcessor;
 import airportSecurityState.util.MyLogger;
+import airportSecurityState.util.Results;
+import airportSecurityState.util.MyLogger.DebugLevel;
 
+/**
+ * Controller class which communicates with the AirportSecurity context class and pass
+ * message with the Security Factors parameters.
+ * @author suresh
+ *
+ */
 public class SecurityFactors {
 
 	FileProcessor fileProcessor;
+	Results results;
 	String[] prohibitedItems = {"Gun", "NailCutter", "Blade", "Knife"};
 
 	AirportSecurity airportSecurity = new AirportSecurity();
 
-	public SecurityFactors(FileProcessor fileProcessorIn) {
+	public SecurityFactors(FileProcessor fileProcessorIn, Results resultsIn) {
+		MyLogger.writeMessage("SecurityFactor Constructor is called", DebugLevel.CONSTRUCTOR);
 		fileProcessor = fileProcessorIn;
+		results = resultsIn;
 	}
 
+	/**
+	 * Iterate through the input file and evaluate security measures for 
+	 * every passenger
+	 */
 	public void process() {
 
 		String line = null;
 		int numPassenger = 0;
 		int numprohibitedItems = 0;
+		
 		while((line = fileProcessor.readLine()) != null) {
 			String[] components = line.split(";");
 			try {
@@ -35,22 +51,31 @@ public class SecurityFactors {
 				}
 
 				eveluate(dayInt, numPassenger, numprohibitedItems);
-			} catch (NumberFormatException e) {
-				MyLogger.writeMessage("SecurityFactors:evaluate - Number Format Exception occured", MyLogger.DebugLevel.ERROR);
+			} catch (Exception e) {
+				MyLogger.writeMessage("SecurityFactors:evaluate - " + e.getMessage(), MyLogger.DebugLevel.ERROR);
 				System.exit(0);
 			}
 		}
+		
+		results.writeToFile();
 
 	}
 
 
+	/**
+	 * Evaluate the factors and send message to Airport Security to check for Tighten or Loosen security
+	 * @param day
+	 * @param numPass
+	 * @param prohibitedCount
+	 */
 	private void eveluate(int day, int numPass, int prohibitedCount) {
 
 		int averageTrafficPerDay = numPass / day;
 		int averageProhibitedItemsPerDay = prohibitedCount / day;
 
 		airportSecurity.tightenOrLoosenSecurity(averageTrafficPerDay, averageProhibitedItemsPerDay);
-
+		
+		results.storeNewResult(airportSecurity.operations());
 	}
 
 

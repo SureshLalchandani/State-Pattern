@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import airportSecurityState.util.MyLogger.DebugLevel;
+
 /**
  * Helper class to process READ and WRITE operations on file
  * @author suresh
@@ -30,6 +32,10 @@ public class FileProcessor {
 	BufferedWriter writer;
 	Permission permission;
 	boolean permitEmptyFile = false;
+	
+	public FileProcessor() {
+		MyLogger.writeMessage("FileProcessor Constructor is called", DebugLevel.CONSTRUCTOR);
+	}
 
 	/**
 	 * Parameterized constructor for binding a File Processor instance with file and access permission
@@ -38,6 +44,7 @@ public class FileProcessor {
 	 * @param permission
 	 */
 	public FileProcessor(String filePath, Permission permission) {
+		MyLogger.writeMessage("FileProcessor Parameterized Constructor is called", DebugLevel.CONSTRUCTOR);
 		this.filePath = filePath;
 		this.permission = permission;
 	} 

@@ -1,7 +1,9 @@
 package airportSecurityState.driver;
 
+import airportSecurityState.airportStates.SecurityFactors;
 import airportSecurityState.util.FileProcessor;
 import airportSecurityState.util.MyLogger;
+import airportSecurityState.util.Results;
 import airportSecurityState.util.FileProcessor.Permission;
 
 /**
@@ -50,8 +52,9 @@ public class Driver {
 		FileProcessor inputFileProcess = new FileProcessor(inputFile, Permission.READ);
 		inputFileProcess.allowEmptyFile(false);
 		
-		FileProcessor outputFileProcess = new FileProcessor(outputFile, Permission.WRITE);
-		outputFileProcess.allowEmptyFile(true);
+		Results results = new Results(outputFile);
+		SecurityFactors factors = new SecurityFactors(inputFileProcess, results);
+		factors.process();
 		
 		
 
