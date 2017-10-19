@@ -1,4 +1,4 @@
-# Assignment 3â€™s README
+# Assignment 3’s README
 
 Navigate to the folder of this README file:
 
@@ -6,7 +6,7 @@ Perform Below commands to compile/run/clean the program:
 
 
 ## To clean:
-ant -build file airportSecurityState/src/build.xml clean
+ant -buildfile airportSecurityState/src/build.xml clean
 
 -----------------------------------------------------------------------
 ## To compile: 
