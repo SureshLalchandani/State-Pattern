@@ -38,6 +38,9 @@ public class SecurityFactors {
 		int numprohibitedItems = 0;
 		
 		while((line = fileProcessor.readLine()) != null) {
+			
+			if(line.trim().length() == 0) continue;
+			
 			String[] components = line.split(";");
 			try {
 
